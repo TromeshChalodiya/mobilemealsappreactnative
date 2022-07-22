@@ -1,6 +1,5 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { NavigationContainer } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 import { Text } from "react-native";
 
@@ -34,17 +33,15 @@ function SettingsScreen() {
 }
 
 export const AppNavigator = () => (
-  <NavigationContainer>
-    <Tab.Navigator
-      screenOptions={createScreenOptions}
-      tabBarOptions={{
-        activeTintColor: "blue",
-        inactiveTintColor: "gray",
-      }}
-    >
-      <Tab.Screen name="Restaurants" component={RestaurantNavigator} />
-      <Tab.Screen name="Map" component={MapScreen} />
-      <Tab.Screen name="Settings" component={SettingsScreen} />
-    </Tab.Navigator>
-  </NavigationContainer>
+  <Tab.Navigator
+    screenOptions={createScreenOptions}
+    tabBarOptions={{
+      activeTintColor: "blue",
+      inactiveTintColor: "gray",
+    }}
+  >
+    <Tab.Screen name="Restaurants" component={RestaurantNavigator} />
+    <Tab.Screen name="Map" component={MapScreen} />
+    <Tab.Screen name="Settings" component={SettingsScreen} />
+  </Tab.Navigator>
 );
