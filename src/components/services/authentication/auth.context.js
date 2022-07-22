@@ -1,5 +1,4 @@
 import React, { useState, createContext } from "react";
-import * as firebase from "firebase/app";
 import { loginRequest } from "./auth.service";
 
 export const AuthenticationContext = createContext();
@@ -7,7 +6,7 @@ export const AuthenticationContext = createContext();
 export const AuthenticationContextProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [user, setUser] = useState(null);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState([]);
 
   const onLogin = (email, password) => {
     setIsLoading(true);
@@ -18,13 +17,21 @@ export const AuthenticationContextProvider = ({ children }) => {
       })
       .catch((e) => {
         setIsLoading(false);
-        setError(e);
+        let message;
+        if (e && e.code === "auth/invalid-email") {
+          message = "Please enter valid email";
+        }
+        if (e && e.code === "auth/wrong-password") {
+          message = "Please enter valid password";
+        }
+        setError(message);
       });
   };
 
   return (
     <AuthenticationContext.Provider
       value={{
+        isAuthenticated: !!user,
         user,
         isLoading,
         error,

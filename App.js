@@ -5,7 +5,6 @@ import {
   useFonts as useOswald,
   Oswald_400Regular,
 } from "@expo-google-fonts/oswald";
-import { LogBox } from "react-native";
 import { useFonts as useLato, Lato_400Regular } from "@expo-google-fonts/lato";
 import { initializeApp } from "firebase/app";
 
