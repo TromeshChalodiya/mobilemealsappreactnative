@@ -10,9 +10,6 @@ import { initializeApp } from "firebase/app";
 
 import { Navigation } from "./src/infrastructure/navigation";
 import { theme } from "./src/infrastructure/theme/index";
-import { RestaurantContextProvider } from "./src/components/services/restaurants/restaurants.context";
-import { LocationContextProvider } from "./src/components/services/location/location.context";
-import { FavouritesContextProvider } from "./src/components/services/favourites/favourites.context";
 import { AuthenticationContextProvider } from "./src/components/services/authentication/auth.context";
 
 const firebaseConfig = {
@@ -43,13 +40,7 @@ export default function App() {
     <>
       <ThemeProvider theme={theme}>
         <AuthenticationContextProvider>
-          <FavouritesContextProvider>
-            <LocationContextProvider>
-              <RestaurantContextProvider>
-                <Navigation />
-              </RestaurantContextProvider>
-            </LocationContextProvider>
-          </FavouritesContextProvider>
+          <Navigation />
         </AuthenticationContextProvider>
       </ThemeProvider>
       <ExpoStatuBar style="auto" />
