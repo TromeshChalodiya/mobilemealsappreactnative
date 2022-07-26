@@ -1,11 +1,14 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
-import { Text } from "react-native";
 
-import { SafeArea } from "../../components/utility/safe-area.component";
 import { RestaurantNavigator } from "./restaurant.navigator";
 import { MapScreen } from "../../features/map/screen/map.screen";
+import { SettingsNavigator } from "../../infrastructure/navigation/SettingsNavigator";
+
+import { RestaurantContextProvider } from "../../components/services/restaurants/restaurants.context";
+import { LocationContextProvider } from "../../components/services/location/location.context";
+import { FavouritesContextProvider } from "../../components/services/favourites/favourites.context";
 
 const Tab = createBottomTabNavigator();
 
@@ -24,24 +27,22 @@ const createScreenOptions = ({ route }) => {
   };
 };
 
-function SettingsScreen() {
-  return (
-    <SafeArea>
-      <Text>Settings!</Text>
-    </SafeArea>
-  );
-}
-
 export const AppNavigator = () => (
-  <Tab.Navigator
-    screenOptions={createScreenOptions}
-    tabBarOptions={{
-      activeTintColor: "blue",
-      inactiveTintColor: "gray",
-    }}
-  >
-    <Tab.Screen name="Restaurants" component={RestaurantNavigator} />
-    <Tab.Screen name="Map" component={MapScreen} />
-    <Tab.Screen name="Settings" component={SettingsScreen} />
-  </Tab.Navigator>
+  <FavouritesContextProvider>
+    <LocationContextProvider>
+      <RestaurantContextProvider>
+        <Tab.Navigator
+          screenOptions={createScreenOptions}
+          tabBarOptions={{
+            activeTintColor: "blue",
+            inactiveTintColor: "gray",
+          }}
+        >
+          <Tab.Screen name="Restaurants" component={RestaurantNavigator} />
+          <Tab.Screen name="Map" component={MapScreen} />
+          <Tab.Screen name="Settings" component={SettingsNavigator} />
+        </Tab.Navigator>
+      </RestaurantContextProvider>
+    </LocationContextProvider>
+  </FavouritesContextProvider>
 );
