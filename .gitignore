@@ -13,6 +13,10 @@ web-build/
 # macOS
 .DS_Store
 
+*/node_modules/**/*
+
 # npm and yarn package lock files
-package-lock.json
-yarn.lock.json
+package-lock
+yarn.lock
+.runtimeconfig.json
+Readme.md

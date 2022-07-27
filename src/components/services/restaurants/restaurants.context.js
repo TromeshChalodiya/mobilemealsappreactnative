@@ -14,6 +14,7 @@ export const RestaurantContextProvider = ({ children }) => {
   const retrieveRestaurants = (loc) => {
     setIsLoading(true);
     setRestaurants([]);
+    // remove setTimeout when connect with firebase func.
     setTimeout(() => {
       restaurantsRequest(loc)
         .then(restaurantTransform)

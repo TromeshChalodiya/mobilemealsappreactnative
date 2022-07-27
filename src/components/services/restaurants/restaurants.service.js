@@ -1,7 +1,16 @@
 import { mockImages, mocks } from "./mock";
 import camelize from "camelize";
 
+// utilize below import when deploy firebase func.
+import { host } from "../../../utils/env";
+
 export const restaurantsRequest = (location) => {
+  // return fetch(
+  //   `http://localhost:5001/mealstogo-4ddc4/us-central1/placesNearby?location=${location}`
+  // ).then((res) => {
+  //   res.json();
+  // });
+
   return new Promise((resolve, reject) => {
     const mock = mocks[location];
     if (!mock) {
