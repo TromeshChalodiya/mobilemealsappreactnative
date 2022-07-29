@@ -1,16 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { List } from "react-native-paper";
 import { ScrollView } from "react-native";
 
 import { RestaurantInfoCard } from "../components/restaurant-info";
 import { SafeArea } from "../../../components/utility/safe-area.component";
+import { Spacer } from "../../../components/spacer/spacer.component";
+import { OrderButton } from "../components/restaurant-info-style";
+import { CartContext } from "../../../components/services/cart/cart.context";
 
-export const DetailScreen = ({ route }) => {
+export const DetailScreen = ({ navigation, route }) => {
   const [breakfastExpanded, setBreakfastExpanded] = useState(false);
   const [lunchExpaned, setLunchExpaned] = useState(false);
   const [dinnerExpaned, setDinnerExpaned] = useState(false);
   const [drinksExpaned, setDrinksExpaned] = useState(false);
 
+  const { addToCart } = useContext(CartContext);
   const { restaurant } = route.params;
 
   return (
@@ -50,6 +54,7 @@ export const DetailScreen = ({ route }) => {
         </List.Accordion>
         <List.Accordion
           title="Drinks"
+          // eslint-disable-next-line react/no-unstable-nested-components
           left={(props) => <List.Icon {...props} icon="cup" />}
           expanded={drinksExpaned}
           onPress={() => setDrinksExpaned(!drinksExpaned)}
@@ -60,6 +65,21 @@ export const DetailScreen = ({ route }) => {
           <List.Item title="Coke" />
         </List.Accordion>
       </ScrollView>
+      <Spacer position="bottom" size="large">
+        <OrderButton
+          icon="cash"
+          mode="contained"
+          onPress={() =>
+            addToCart(
+              { item: "special", price: 1299 },
+              restaurant,
+              navigation.navigate("Checkout")
+            )
+          }
+        >
+          Order spacial only $12.99!
+        </OrderButton>
+      </Spacer>
     </SafeArea>
   );
 };

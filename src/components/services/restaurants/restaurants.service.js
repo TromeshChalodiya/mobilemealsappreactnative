@@ -2,11 +2,11 @@ import { mockImages, mocks } from "./mock";
 import camelize from "camelize";
 
 // utilize below import when deploy firebase func.
-import { host } from "../../../utils/env";
+import { host, isMock } from "../../../utils/env";
 
 export const restaurantsRequest = (location) => {
   // return fetch(
-  //   `http://localhost:5001/mealstogo-4ddc4/us-central1/placesNearby?location=${location}`
+  //   `http://localhost:5001/mealstogo-4ddc4/us-central1/placesNearby?location=${location}&mock=${isMock}`
   // ).then((res) => {
   //   res.json();
   // });
