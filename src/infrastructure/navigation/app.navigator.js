@@ -4,18 +4,21 @@ import { Ionicons } from "@expo/vector-icons";
 
 import { RestaurantNavigator } from "./restaurant.navigator";
 import { MapScreen } from "../../features/map/screen/map.screen";
+import { CheckoutNavigator } from "./checkout.navigator.js";
 import { SettingsNavigator } from "../../infrastructure/navigation/SettingsNavigator";
 
 import { RestaurantContextProvider } from "../../components/services/restaurants/restaurants.context";
 import { LocationContextProvider } from "../../components/services/location/location.context";
 import { FavouritesContextProvider } from "../../components/services/favourites/favourites.context";
+import { CartContextProvider } from "../../components/services/cart/cart.context";
 
 const Tab = createBottomTabNavigator();
 
 const TAB_ICON = {
-  Restaurants: "restaurant-sharp",
-  Map: "map",
-  Settings: "settings",
+  Restaurants: "md-restaurant",
+  Checkout: "md-cart",
+  Map: "md-map",
+  Settings: "md-settings",
 };
 
 const createScreenOptions = ({ route }) => {
@@ -31,17 +34,20 @@ export const AppNavigator = () => (
   <FavouritesContextProvider>
     <LocationContextProvider>
       <RestaurantContextProvider>
-        <Tab.Navigator
-          screenOptions={createScreenOptions}
-          tabBarOptions={{
-            activeTintColor: "blue",
-            inactiveTintColor: "gray",
-          }}
-        >
-          <Tab.Screen name="Restaurants" component={RestaurantNavigator} />
-          <Tab.Screen name="Map" component={MapScreen} />
-          <Tab.Screen name="Settings" component={SettingsNavigator} />
-        </Tab.Navigator>
+        <CartContextProvider>
+          <Tab.Navigator
+            screenOptions={createScreenOptions}
+            tabBarOptions={{
+              activeTintColor: "blue",
+              inactiveTintColor: "gray",
+            }}
+          >
+            <Tab.Screen name="Restaurants" component={RestaurantNavigator} />
+            <Tab.Screen name="Checkout" component={CheckoutNavigator} />
+            <Tab.Screen name="Map" component={MapScreen} />
+            <Tab.Screen name="Settings" component={SettingsNavigator} />
+          </Tab.Navigator>
+        </CartContextProvider>
       </RestaurantContextProvider>
     </LocationContextProvider>
   </FavouritesContextProvider>
