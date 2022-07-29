@@ -9,6 +9,7 @@ import { SafeArea } from "../../../components/utility/safe-area.component";
 import { AuthenticationContext } from "../../../components/services/authentication/auth.context";
 import { Text } from "../../../components/typography/text.component";
 import { Spacer } from "../../../components/spacer/spacer.component";
+import { colors } from "../../../infrastructure/theme/colors";
 
 const SettingsItem = styled(List.Item)`
   padding: ${(props) => props.theme.space[3]};
@@ -47,7 +48,11 @@ export const SettingsScreen = ({ navigation }) => {
       <AvatarContainer>
         <TouchableOpacity onPress={() => navigation.navigate("Camera")}>
           {!photo && (
-            <Avatar.Icon size={140} icon="human" backgroundColor="#2182BD" />
+            <Avatar.Icon
+              size={140}
+              icon="human"
+              backgroundColor={colors.brand.primary}
+            />
           )}
           {photo && (
             <Avatar.Image
